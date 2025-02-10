@@ -1,0 +1,11 @@
+housing:
+  local_path: data/01_raw/housing_main.csv
+
+lookup:
+  local_path: data/01_raw/housing_lookup.csv
+
+processed_housing:
+  local_path: data/02_intermediate/processed_housing.csv
+
+mastertable:
+  local_path: data/03_primary/mastertable.csv
