@@ -1,5 +1,7 @@
 import pandas as pd
 import pickle
+from pathlib import Path
+
 from sklearn.linear_model import LinearRegression
 from helper.data_helper import get_data_path, get_data_path
 
@@ -13,6 +15,8 @@ def train(input_data: list[str], output_data: list[str], is_local) -> pd.DataFra
     reg = LinearRegression()
     reg.fit(x_train,y_train)
 
-
-    with open(output_data_assets['lr_model']) as file:
+    dir_path = "/".join(output_data_assets['lr_model'].split("/")[:-1])
+    if not Path(dir_path).exists():
+        Path(dir_path).mkdir(parents=True, exist_ok=True)
+    with open(output_data_assets['lr_model'], 'wb') as file:
         pickle.dump(reg, file)

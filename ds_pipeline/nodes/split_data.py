@@ -8,8 +8,8 @@ def training_split(input_data: list[str], output_data: list[str], is_local) -> p
     
     housing_df = pd.read_csv(data_assets['mastertable'])
     
-    X=housing_df.drop('median_house_value',axis=1)
-    y=housing_df['median_house_value']
+    X=housing_df.drop('MedHouseVal',axis=1)
+    y=housing_df['MedHouseVal']
     
     X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.33)
 

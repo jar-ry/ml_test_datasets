@@ -1,6 +1,7 @@
 import os
 import yaml
 import pandas as pd
+from pathlib import Path
 
 def _get_data_catalogue(data_catalogue_file: str = "data_catalogue.yml") -> dict:
     """
@@ -82,10 +83,16 @@ def save_dataframes(
      
     for data_asset, dataframe in dataframes.items():
         save_path = assets_details[data_asset]
-
+        if Path(save_path).is_dir():
+            if not Path(save_path).exists():
+                Path(save_path).mkdir(parents=True, exist_ok=True)
+        else:
+            dir_path = "/".join(save_path.split("/")[:-1])
+            if not Path(dir_path).exists():
+                Path(dir_path).mkdir(parents=True, exist_ok=True)
         if save_type == "csv":
-            if isinstance(dataframe, pd.DataFrame):
+            if isinstance(dataframe, pd.DataFrame) or isinstance(dataframe, pd.Series):
                 dataframe.to_csv(save_path)
         elif save_type == "parquet":
-            if isinstance(dataframe, pd.DataFrame):
+            if isinstance(dataframe, pd.DataFrame) or isinstance(dataframe, pd.Series):
                 dataframe.to_parquet(save_path)

@@ -13,11 +13,6 @@ def evaluate(input_data: list[str], output_data: list[str], is_local) -> pd.Data
     
     x_test = pd.read_csv(input_data_assets['x_test'])
     y_test = pd.read_csv(input_data_assets['y_test'])
-    
-    # a classic housing price dataset
-    # X, y = shap.datasets.california(n_points=1000)
-
-    # X100 = shap.utils.sample(X, 100)  # 100 instances for use as the background distribution
 
     # load
     with open(input_data_assets['lr_model'], 'rb') as f:
@@ -27,18 +22,6 @@ def evaluate(input_data: list[str], output_data: list[str], is_local) -> pd.Data
     
     rmse = np.sqrt(mean_squared_error(y_test,y_pred))
     r2 = r2_score(y_test, y_pred)
-    
-    plt = shap.partial_dependence_plot(
-        "median_house_value",
-        reg.predict,
-        x_test,
-        ice=False,
-        model_expected_value=True,
-        feature_expected_value=True,
-    )
-    pl.savefig("shap_summary.svg",dpi=700) #.png,.pdf will also support here
-
-    plt
 
     metrics_df = pd.DataFrame(
         {
