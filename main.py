@@ -1,4 +1,5 @@
-from de_pipeline.pipeline import run_pipeline
+from de_pipeline.pipeline import run_de_pipeline
+from ds_pipeline.pipeline import run_ds_pipeline
 import argparse
 
 def parse_args():
@@ -16,6 +17,10 @@ if __name__  == "__main__":
     # Process args
     args = parse_args()
     
-    run_pipeline(
+    # run_de_pipeline(
+    #     is_local=args.local
+    # )
+
+    run_ds_pipeline(
         is_local=args.local
     )

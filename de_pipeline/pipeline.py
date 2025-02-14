@@ -1,7 +1,7 @@
 from de_pipeline.nodes.preprocess_data import preprocess_data
 from de_pipeline.nodes.process_data import process_data
 
-def run_pipeline(is_local):
+def run_de_pipeline(is_local):
     """
         Orchestrate and run ML pipeline
     """
